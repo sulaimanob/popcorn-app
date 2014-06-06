@@ -107,20 +107,6 @@
                 checkReady();
             }
         });
-
-        engine.on('uninterested', function() {
-            if (engine) {
-                engine.swarm.pause();
-            }
-
-        });
-
-        engine.on('interested', function() {
-            if (engine) {
-                engine.swarm.resume();
-            }
-        });
-
     };
 
     var Streamer = {
