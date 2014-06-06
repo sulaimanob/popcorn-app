@@ -114,7 +114,7 @@
             var torrentUrl  = model.get('torrent');
             var torrent_read = model.get('torrent_read');
             
-            var stateModel = new Backbone.Model({state: 'connecting', backdrop: model.get('backdrop')});
+            var stateModel = new Backbone.Model({state: State.Connecting, backdrop: model.get('backdrop')});
             App.vent.trigger('stream:started', stateModel);
 
             if(engine) {
