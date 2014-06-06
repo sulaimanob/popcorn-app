@@ -201,9 +201,13 @@
                     var title = model.get('title');
                     if(!title) { //From ctrl+v magnet or drag torrent
 
-                        torrent.files = _.filter(torrent.files, function(file) {
-                            return isValidVideoFormat(file.name);
-                        });
+                        // Magnets do not have files, meaning we need to check if files
+                        // exist before we filter.
+                        if (torrent.files) {
+                            torrent.files = _.filter(torrent.files, function(file) {
+                                return isValidVideoFormat(file.name);
+                            });
+                        }
 
                         if(torrent.files && torrent.files.length > 1 && !model.get('file_index') && model.get('file_index') !== 0) {
                             torrent.files = $.grep(torrent.files, function(n) { return(n); });
