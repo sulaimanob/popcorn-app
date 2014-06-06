@@ -53,7 +53,7 @@
         var temporaryFileName = torrent.info.infoHash.replace(/([^a-zA-Z0-9-_])/g, '_'),
             temporaryFile = path.join(App.settings.tmpLocation, temporaryFileName);
 
-        console.debug('Streaming movie to %s', temporaryFile);
+        win.debug('Streaming movie to %s', temporaryFile);
 
         engine = peerflix(torrent.info, {
             connections: parseInt(Settings.connectionLimit, 10) || 100, // Max amount of peers to be connected to.
@@ -67,7 +67,7 @@
         engine.swarm.piecesGot = 0;
         engine.on('verify', function(index) {
             engine.swarm.piecesGot += 1;
-            console.debug('Got piece #%d', index);
+            win.debug('Got piece #%d', index);
         });
 
         var streamInfo = new App.Model.StreamInfo({engine: engine});
@@ -143,17 +143,17 @@
                     var extractSubtitle = model.get('extract_subtitle');
                     
                     var getSubtitles = function(data){
-                        console.debug('Subtitle data request:', data);
+                        win.debug('Subtitle data request:', data);
                         
                         var subtitleProvider = new (App.Config.getProvider('tvshowsubtitle'))();
                         
                         subtitleProvider.query(data, function(subs) {
                             if (Object.keys(subs).length > 0) {
                                 subtitles = subs;
-                                console.info(Object.keys(subs).length + ' subtitles found');
+                                win.info(Object.keys(subs).length + ' subtitles found');
                             }else{
                                 subtitles = null;
-                                console.warn('No subtitles returned');
+                                win.warn('No subtitles returned');
                             }
                             hasSubtitles = true;
                         });
@@ -222,10 +222,10 @@
                                     var trakt = new (App.Config.getProvider('metadata'))();
                                     trakt.episodeDetail({title: tvshowname, season: se_re[2], episode: se_re[3]}, function(error, data) {
                                         if(error) {
-                                            console.warn(error);
+                                            win.warn(error);
                                             getSubtitles(sub_data);
                                         } else if(!data) {
-                                            console.warn('TTV error:', error.error);
+                                            win.warn('TTV error:', error.error);
                                             getSubtitles(sub_data);
                                         } else {
                                             $('.loading-background').css('background-image', 'url('+data.show.images.fanart+')');
@@ -278,7 +278,7 @@
             engine = null;
             subtitles = null; // reset subtitles to make sure they will not be used in next session.
             hasSubtitles = false;
-            console.info('Streaming cancelled');
+            win.info('Streaming cancelled');
         }
     };
 
