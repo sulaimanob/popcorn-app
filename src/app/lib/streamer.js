@@ -109,6 +109,13 @@
         });
     };
 
+    var isValidVideoFormat = function(fileName) {
+        var extension = path.extname(fileName);
+        return extension === '.avi'
+            || extension === '.mp4'
+            || extension === '.mkv';
+    };
+
     var Streamer = {
         start: function(model) {
             var torrentUrl  = model.get('torrent');
@@ -193,15 +200,13 @@
                     //Try get subtitles for custom torrents
                     var title = model.get('title');
                     if(!title) { //From ctrl+v magnet or drag torrent
-                        for(var f in torrent.files) {
-                            if(!torrent.files[f].name.endsWith('.avi') && 
-                                !torrent.files[f].name.endsWith('.mp4') && 
-                                !torrent.files[f].name.endsWith('.mkv')) {
-                                torrent.files[f] = null;
-                            }
-                        }
+
+                        torrent.files = _.filter(torrent.files, function(file) {
+                            return isValidVideoFormat(file.name);
+                        });
+
                         if(torrent.files && torrent.files.length > 1 && !model.get('file_index') && model.get('file_index') !== 0) {
-                            torrent.files = $.grep(torrent.files,function(n){ return(n); });
+                            torrent.files = $.grep(torrent.files, function(n) { return(n); });
                             var fileModel = new Backbone.Model({torrent: torrent, files: torrent.files});
                             App.vent.trigger('system:openFileSelector', fileModel);
                         }
