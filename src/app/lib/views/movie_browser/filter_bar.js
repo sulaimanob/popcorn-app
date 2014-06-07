@@ -31,20 +31,31 @@
         onShow: function() {
             this.$('.sorters .dropdown-menu a:nth(0)').addClass('active');
             this.$('.genres  .dropdown-menu a:nth(0)').addClass('active');
+           
         },
         
         focusSearch: function () {
             this.$('.search input').focus();
+
         },
 
         search: function(e) {
             App.vent.trigger('about:close');
             App.vent.trigger('movie:closeDetail');
             e.preventDefault();
+            var searchvalue = this.ui.search.val(); 
             this.model.set({
                 keywords: this.ui.search.val(),
                 genre: ''
             });
+            if(searchvalue !== '')
+            {          
+                $('#searchbox').attr('placeholder', searchvalue);       
+            }
+            else
+            {
+                $('#searchbox').attr('placeholder', 'Search');  
+            }
             this.ui.search.val('');
             this.ui.search.blur();
         },
