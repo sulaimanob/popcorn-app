@@ -70,12 +70,12 @@
             win.debug('Got piece #%d', index);
         });
 
-        var streamInfo = new App.Model.StreamInfo({engine: engine});
+        var streamInfo = new App.Model.TorrentStatus({engine: engine});
 
         // Fix for loading modal
-        streamInfo.updateStats(engine);
+        streamInfo.updateStatistics(engine);
         
-        statsUpdater = setInterval(_.bind(streamInfo.updateStats, streamInfo, engine), 3000);
+        statsUpdater = setInterval(_.bind(streamInfo.updateStatistics, streamInfo, engine), 3000);
         stateModel.set('streamInfo', streamInfo);
         stateModel.set('state', State.Connecting);
         watchState(stateModel);

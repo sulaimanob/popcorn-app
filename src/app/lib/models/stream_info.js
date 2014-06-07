@@ -18,8 +18,8 @@
 		return (speed / Math.pow(1024, converted_speed)).toFixed(2) + ' ' + fileSizes[converted_speed] + '/s';
 	};
 
-    var StreamInfo = Backbone.Model.extend({
-        updateStats: function(engine) {
+    var TorrentStatus = Backbone.Model.extend({
+        updateStatistics: function(engine) {
 
 			var swarm = engine.swarm;
 
@@ -45,5 +45,5 @@
         }
     });
 
-    App.Model.StreamInfo = StreamInfo;
+    App.Model.TorrentStatus = TorrentStatus;
 })(window.App);
