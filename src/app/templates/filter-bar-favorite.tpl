@@ -4,8 +4,24 @@
 </ul>
 
 <ul class="nav nav-hor right">
-	<!-- TODO: Add active class -->
-	<li><button class="favorites active"></button></li>
-	<li><button class="about"></button></li>
-	<li><button class="settings"></button></li>
+	<li>
+		<div class="right search">
+			<form><input id="searchbox" type="text" placeholder="<%= i18n.__("Search") %>"></form>
+		</div>
+	</li>
+	<li>
+		<button class="favorites">
+			<i class="fa fa-lg fa-heart"></i>
+		</button>
+	</li>
+	<li>
+		<button class="about active">
+			<i class="fa fa-lg fa-info-circle"></i>
+		</button>
+		</li>
+	<li>
+		<button class="settings">
+			<i class="fa fa-lg fa-cog"></i>
+		</button>
+	</li>
 </ul>

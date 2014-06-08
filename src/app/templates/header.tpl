@@ -5,6 +5,8 @@
 </nav>
 
 <nav class="btn-set fs-<%= process.platform %>">
-	<button class="btn-os fullscreen"></button>
+	<button class="btn-os fullscreen">
+		<i class="fa fa-2x fa-expand"></i>
+	</button>
 </nav>
 <h1>Popcorn Time</h1>
