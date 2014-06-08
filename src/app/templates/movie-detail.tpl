@@ -1,14 +1,16 @@
-<%  
-if(typeof backdrop === "undefined"){ backdrop = ""; }; 
-if(typeof synopsis === "undefined"){ synopsis = "Synopsis not available."; }; 
-if(typeof runtime === "undefined"){ runtime = "N/A"; }; 
+<%
+if(typeof backdrop === "undefined"){ backdrop = ""; };
+if(typeof synopsis === "undefined"){ synopsis = "Synopsis not available."; };
+if(typeof runtime === "undefined"){ runtime = "N/A"; };
 %>
 <div class="movie-detail">
 	<div id="movie-backdrop" data-bgr="<%= backdrop %>" class="movie-backdrop">
 		<div class="movie-backdrop-overlay"></div>
 	</div>
 	<div class="detail-window">
-		<div class="movie-detail-close"></div>
+		<div class="movie-detail-close">
+			<i class="fa fa-2x fa-times"></i>
+		</div>
 		<img class="movie-cover-image" src="images/cover-placeholder.jpg" data-cover="<%= image %>" />
 		<div class="movie-data">
 			<div class="movie-meta-title"><%= title %></div>
@@ -32,18 +34,20 @@ if(typeof runtime === "undefined"){ runtime = "N/A"; };
 						<div class="rating-star null"></div>
 					<% }; %>
 				</div>
-				
-				<div data-toggle="tooltip" data-placement="left" title="Health <%= health %>" class="health-icon Excellent"></div>
+
+				<div data-toggle="tooltip" data-placement="left" title="Health <%= health %>" class="health-icon Excellent">
+					<i class="fa fa-bolt"></i>
+				</div>
 			</div>
 
 			<div class="movie-overview-container">
 				<div class="movie-meta-overview"><%= synopsis %></div>
 			</div>
-			
+
 			<div class="movie-bottom">
 				<div class="movie-buttons">
 					<div class="detail-favourites"><%=i18n.__("Add to bookmarks") %></div>
-						
+
 					<div class="sub-dropdown"><%= i18n.__("Subtitles") %>
 						<div class="flag toggle selected-lang none"></div>
 						<div class="sub-dropdown-arrow"></div>

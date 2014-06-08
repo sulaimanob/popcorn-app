@@ -1,4 +1,6 @@
-<div class="tv-container-close"></div>
+<div class="tv-container-close">
+	<i class="fa fa-2x fa-times"></i>
+</div>
 <div class="tv-poster">
 	<div data-bgr="<%= images.fanart %>" class="tv-poster-background"><div class="tv-poster-overlay"></div></div>
 	<div style="background-image:url(<%= images.poster %>);" class="tv-cover"></div>
@@ -100,7 +102,7 @@
 										<span><%=episodeData.episode %></span>
 										<div><%=episodeData.title %></div>
 									</a>
-									
+
 									<span id="watched-<%=episodeData.season%>-<%=episodeData.episode%>" class="watched"><img src="images/icons/Player/ViewMoreInfo.png" /></span>
 
 
