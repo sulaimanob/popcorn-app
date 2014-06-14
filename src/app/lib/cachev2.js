@@ -60,6 +60,23 @@
         var deferred = Q.defer();
         var request = this.db.transaction(this.table, 'readonly').objectStore(this.table).get(key);
         request.onsuccess = function() {
+            if(this.result === undefined) {
+                deferred.resolve(undefined);
+                return;
+            }
+
+
+            // Make sure the entry hasn't expired
+            var ttl = this.result._ttl;
+            var lastModified = this.result._lastModified;
+            if(new Date() - lastModified > ttl) {
+                // TODO: Delete the entry
+                // NOTE: Can't just delete the entry as its a readonly transaction.
+                //       For now we return undefined (no entry).
+                deferred.resolve(undefined);
+                return;
+            }
+
             delete this.result._id;
             delete this.result._ttl;
             delete this.result._lastModified;
@@ -73,13 +90,24 @@
 
     Cache.prototype.getMultiple = function(keys) {
         var deferred = Q.defer();
-        var request = this.db.transaction(this.table, 'readonly').objectStore(this.table).openCursor();
+        var request = this.db.transaction(this.table, 'readwrite').objectStore(this.table).openCursor();
         var results = [];
         request.onsuccess = function() {
             var cursor = this.result;
             if(cursor) {
                 if(_.contains(keys, cursor.key)) {
-                    results.push(cursor.value);
+                    // Make sure the entry hasn't expired
+                    var ttl = cursor.value._ttl;
+                    var lastModified = cursor.value._lastModified;
+                    if(new Date() - lastModified > ttl) {
+                        cursor.delete();
+                    } else {
+                        var data = cursor.value;
+                        delete data._id;
+                        delete data._ttl;
+                        delete data._lastModified;
+                        results.push(data);
+                    }
                 }
                 cursor.continue();
             } else {

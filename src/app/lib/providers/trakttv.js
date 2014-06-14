@@ -14,7 +14,8 @@
         PT_VERSION = AdvSettings.get('version');
 
     function TraktTv() {
-        App.Providers.CacheProviderV2.call(this, 'metadata');
+        // Should Trakt.tv data have an infinite cache?
+        App.Providers.CacheProviderV2.call(this, 'metadata', Infinity);
 
         this.authenticated = false;
         this._credentials = {username: '', password: ''};
