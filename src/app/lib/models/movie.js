@@ -9,21 +9,38 @@
     };
 
     var Movie = Backbone.Model.extend({
-        events: {
-            'change:torrents': 'updateHealth',
-        },
-
         idAttribute: 'imdb',
 
         initialize: function() {
-            this.updateHealth();
+            var self = this;
+            this._persistent = {};
+
+            App.Caches.Model.get(this.get('imdb')).then(function(data) {
+                if(data) {
+                    self.set(data, {silent: true});
+                    self._persistent = data;
+                }
+            });
+
+            this.on('change:torrents', this.updateHealth);
+            this.on('change', this.storePersistent);
+        },
+
+        storePersistent: function(model) {
+            if(_.intersection(_.keys(model.changed), _.keys(this._persistent)).length > 0) {
+                 _.extend(this._persistent, _.pick(model.changed, _.keys(this._persistent)));
+                App.Caches.Model.set(this.get('imdb'), this._persistent, {ttl: Infinity});
+            }
+        },
+
+        persist: function(key, val, options) {
+            this._persistent[key] = val;
+            this.set(key, val, options);
         },
 
         updateHealth: function() {
             var torrents = this.get('torrents');
             _.each(torrents, function(torrent) {
-
-                
                 if (!torrent.url) {
 
                     // we have a tv show

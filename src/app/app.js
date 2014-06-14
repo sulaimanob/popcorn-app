@@ -62,7 +62,6 @@ _.each(document.querySelectorAll('[type="text/x-template"]'), function (el) {
 });
 
 // Global App skeleton for backbone
-var App = new Backbone.Marionette.Application();
 _.extend(App, {
 	Controller: {},
 	View: {},

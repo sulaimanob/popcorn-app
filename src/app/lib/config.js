@@ -1,5 +1,7 @@
-(function(App) {
+(function(window) {
     'use strict';
+
+    var App = window.App = new Backbone.Marionette.Application();
 
     var Config = {
         title: 'Popcorn Time',
@@ -85,8 +87,8 @@
 
         cachev2: {
             name: 'cache',
-            version: 3,
-            tables: ['metadata']
+            version: 5,
+            tables: ['metadata','models']
         },
 
         providers: {
@@ -103,4 +105,4 @@
     };
 
     App.Config = Config;
-})(window.App);
+})(window);
