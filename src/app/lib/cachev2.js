@@ -29,6 +29,14 @@
         return deferred;
     }
 
+    // Returns the entry size minus any '_' values
+    function GetEntrySize(entry) {
+        if(!entry) {
+            return 0;
+        }
+        return Object.keys(_.omit(entry, '_id', '_ttl', '_lastModified')).length;
+    }
+
     function Cache(table) {
         var self = this;
 
@@ -151,7 +159,7 @@
             if(cursor) {
                 var ttl = cursor.value._ttl;
                 var lastModified = cursor.value._lastModified;
-                if(new Date() - lastModified > ttl) {
+                if(new Date() - lastModified > ttl || GetEntrySize(cursor.value) <= 0) {
                     cursor.delete();
                 }
                 cursor.continue();
