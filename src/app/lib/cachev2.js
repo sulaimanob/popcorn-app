@@ -58,6 +58,12 @@
 
     Cache.prototype.get = function(key) {
         var deferred = Q.defer();
+
+        if(!key) {
+            deferred.reject('No key specified');
+            return deferred.promise;
+        }
+
         var request = this.db.transaction(this.table, 'readonly').objectStore(this.table).get(key);
         request.onsuccess = function() {
             if(this.result === undefined) {
