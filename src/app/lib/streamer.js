@@ -15,6 +15,7 @@
     };
     var subtitles = null;
     var hasSubtitles = false;
+    var externalPlayer = false;
 
 
     var watchState = function(stateModel) {
@@ -22,7 +23,7 @@
         if (engine != null) {
 
             var swarm = engine.swarm;
-            var state = 'connecting';            
+            var state = 'connecting'; 
 
             if((swarm.downloaded > BUFFERING_SIZE || (swarm.piecesGot * (engine.torrent !== null ? engine.torrent.pieceLength : 0)) > BUFFERING_SIZE)) {
                 state = 'ready';
@@ -33,6 +34,9 @@
             }
             if(state === 'ready' && !hasSubtitles) {
                 state = 'waitingForSubtitles';
+            }
+            if(state === 'ready' && externalPlayer) {
+                state = 'playingExternally';
             }
 
             stateModel.set('state', state);
@@ -66,6 +70,8 @@
             engine.swarm.piecesGot += 1;
         });
 
+        externalPlayer = Settings.externalPlayer;
+
         var streamInfo = new App.Model.StreamInfo({engine: engine});
 
         // Fix for loading modal
@@ -77,7 +83,7 @@
         watchState(stateModel);
 
         var checkReady = function() {
-            if(stateModel.get('state') === 'ready') {
+            if(stateModel.get('state') === 'ready' || stateModel.get('state') === 'playingExternally') {
                 streamInfo.set(torrent);
 
                 // we need subtitle in the player

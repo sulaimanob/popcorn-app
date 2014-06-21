@@ -117,8 +117,11 @@
 			<!-- Cache Directory / -->
 			
 			<input class="settings-checkbox" name="deleteTmpOnClose" id="cb2" type="checkbox" <%=(Settings.deleteTmpOnClose? "checked='checked'":"")%>>
-
 			<label class="settings-label" for="cb2"><%= i18n.__("Clear Tmp Folder after closing app?") %></label>
+			<br><br>
+			<input class="settings-checkbox" name="externalPlayer" id="cbPlayer" type="checkbox" <%=(Settings.externalPlayer? "checked='checked'":"")%>>
+			<label class="settings-label" for="cbPlayer"><%= i18n.__("Use external video player") %></label>
+			<br><br>
 		</div>
 		<div class="btns">
 			<div class="btn-settings flush-bookmarks"><%= i18n.__("Flush bookmarks database") %></div>

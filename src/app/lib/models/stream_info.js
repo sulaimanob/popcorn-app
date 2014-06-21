@@ -1,14 +1,15 @@
 (function(App) {
-    'use strict';
+	'use strict';
 
-    var StreamInfo = Backbone.Model.extend({
-        updateStats: function() {
+	var StreamInfo = Backbone.Model.extend({
+		updateStats: function() {
 			var active = function(wire) {return !wire.peerChoking;};
 			var engine = this.get('engine');
 			var swarm = engine.swarm;
 			var BUFFERING_SIZE = 10 * 1024 * 1024;
-            var converted_speed = 0;
-            var percent = 0;
+			var converted_speed = 0;
+			var percent = 0;
+			var externalPlayer = App.settings.externalPlayer;
 
 			var upload_speed = swarm.uploadSpeed(); // upload speed
 			var final_upload_speed = '0 B/s';
@@ -34,12 +35,15 @@
 
 			swarm.downloaded = (swarm.downloaded) ? swarm.downloaded : 0;
 			percent = swarm.downloaded / (BUFFERING_SIZE / 100);
-			if(percent >= 100) {
+			if(percent >= 100 && !externalPlayer) {
 				percent = 99; // wait for subtitles
 			}
+			if(percent >= 100 && externalPlayer) {
+				percent = 100;
+			}
 			this.set('percent', percent);
-        }
-    });
+		}
+	});
 
-    App.Model.StreamInfo = StreamInfo;
+	App.Model.StreamInfo = StreamInfo;
 })(window.App);

@@ -151,5 +151,8 @@
 	"Test Login": "Test Login",
 	"Testing...": "Testing...",
 	"Success!": "Success!",
-	"Failed!": "Failed!"
+	"Failed!": "Failed!",
+	"Popcorn Time stores an encrypted hash of your password in your local database": "Popcorn Time stores an encrypted hash of your password in your local database",
+	"Use external video player": "Use external video player",
+	"playingExternally": "Playing in external video player"
 }

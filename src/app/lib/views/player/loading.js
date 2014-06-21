@@ -44,6 +44,11 @@
             if(state === 'downloading') {
                 this.listenTo(this.model.get('streamInfo'), 'change:downloaded', this.onProgressUpdate);
             }
+
+            if(state === 'playingExternally') {
+                this.ui.downloadPercent.hide();
+                this.ui.progressbar.hide();
+            }
         },
 
         onProgressUpdate: function() {

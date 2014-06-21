@@ -34,10 +34,10 @@
 		},
 
 		onClose: function() {
-            Mousetrap.bind('backspace', function(e) {
-                App.vent.trigger('show:closeDetail');
-                App.vent.trigger('movie:closeDetail');
-            });
+			Mousetrap.bind('backspace', function(e) {
+				App.vent.trigger('show:closeDetail');
+				App.vent.trigger('movie:closeDetail');
+			});
 			$('.filter-bar').show();
 			$('#movie-detail').show();
 		},
@@ -73,6 +73,7 @@
 				break;
 			case 'moviesShowQuality':
 			case 'deleteTmpOnClose':
+			case 'externalPlayer':
 				value = field.is(':checked');
 				break;
 			case 'connectionLimit':
