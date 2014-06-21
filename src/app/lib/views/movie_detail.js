@@ -55,7 +55,7 @@
 
         onShow: function() {
         	win.info('Show movie detail');
-        $('.bottom-container').css('margin-left', $('.cover-image').width() + 'px');
+
 
 
         	var torrents = this.model.get('torrents');
