@@ -3,6 +3,9 @@
 
 	var _this;
 	var process = require('child_process');
+	var request = require('request');
+	var AdmZip = require('adm-zip');
+	var fs = require('fs');
 
 	var MainWindow = Backbone.Marionette.Layout.extend({
 		template: '#main-window-tpl',
@@ -246,11 +249,15 @@
 				var filePath = streamModel.attributes.engine.path;
 				filePath += '/';
 				filePath += streamModel.attributes.engine.files[0].path;
+
+
 				console.log('Launching External Player: '+ filePath);
 				console.log('src: '+ streamModel.attributes.src);
+
 				/* This works for seeking etc but requires application/installation detection etc
 				process.exec('/Applications/VLC.app/Contents/MacOS/VLC '+ streamModel.attributes.src);
 				*/
+
 				//Seeking does not work with below, above should be used in future, but for now it will do
 				gui.Shell.openItem(filePath);
 			}

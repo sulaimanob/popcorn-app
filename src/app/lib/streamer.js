@@ -39,6 +39,15 @@
                 state = 'playingExternally';
             }
 
+            if(hasSubtitles && subtitles !== null && 
+            externalPlayer && Settings.subtitle_language !== 'none') { 
+            // download default subtitles for external player, we don't care when it's done really, so don't stop video playing
+                Utils.downloadSubtitle({
+                    url: subtitles[Settings.subtitle_language], 
+                    filePath: engine.path + '/' + engine.files[0].path
+                });
+            }
+
             stateModel.set('state', state);
 
             if(state !== 'ready') {
