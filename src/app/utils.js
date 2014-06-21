@@ -1,4 +1,7 @@
 var Utils = {};
+var request = require('request');
+var AdmZip = require('adm-zip');
+var fs = require('fs');
 
 Utils.downloadSubtitle = function(data) {
 	console.log(data);

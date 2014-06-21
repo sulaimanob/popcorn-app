@@ -3,10 +3,6 @@
 
 	var _this;
 	var process = require('child_process');
-	var request = require('request');
-	var AdmZip = require('adm-zip');
-	var fs = require('fs');
-
 	var MainWindow = Backbone.Marionette.Layout.extend({
 		template: '#main-window-tpl',
 
