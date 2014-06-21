@@ -5,22 +5,22 @@
 
 	App.View.MovieDetail = Backbone.Marionette.ItemView.extend({
 		template: '#movie-detail-tpl',
-		className: 'app-overlay',
+		className: 'movie-detail',
 
 		ui: {
 			selected_lang: '.selected-lang',
-			bookmarkIcon: '.detail-favourites'
+			bookmarkIcon: '.favourites-toggle'
 		},
 
 		events: {
-			'click .movie-btn.watch': 'startStreaming',
-			'click .movie-btn.trailer': 'playTrailer',
+			'click #watch-now': 'startStreaming',
+			'click #watch-trailer': 'playTrailer',
 			'click .movie-detail-close': 'closeDetails',
 			'click #switch-hd-on': 'enableHD',
 			'click #switch-hd-off': 'disableHD',
 			'click .sub-dropdown': 'toggleDropdown',
 			'click .sub-flag-icon': 'closeDropdown',
-			'click .detail-favourites': 'toggleFavourite',
+			'click .favourites-toggle': 'toggleFavourite',
 			'click .movie-imdb-link': 'openIMDb'
 		},
 
@@ -55,6 +55,8 @@
 
         onShow: function() {
         	win.info('Show movie detail');
+        $('.bottom-container').css('margin-left', $('.cover-image').width() + 'px');
+
 
         	var torrents = this.model.get('torrents');
         	if (torrents['720p'] !== undefined && torrents['1080p'] !== undefined) {
@@ -69,21 +71,22 @@
 
         	$('.star-container,.movie-imdb-link').tooltip();
 
-        	var backgroundUrl = $('.movie-backdrop').attr('data-bgr');
+        	var backgroundUrl = $('.backdrop-overlay').attr('data-bgr');
 
         	var bgCache = new Image();
         	bgCache.src = backgroundUrl;
         	bgCache.onload = function() {
-        		$('.movie-backdrop').css('background-image', 'url(' + backgroundUrl + ')').fadeIn(500);
+        		$('.movie-detail').css('background-image', 'url(' + backgroundUrl + ')').fadeIn(500);
         		bgCache = null;
         	};
 
-        	var coverUrl = $('.movie-cover-image').attr('data-cover');
+        	var coverUrl = $('.cover-image').attr('data-cover');
 
         	var coverCache = new Image();
         	coverCache.src = coverUrl;
         	coverCache.onload = function() {
-        		$('.movie-cover-image').attr('src', coverUrl).fadeTo(500, 1);
+        		$('.cover-image').attr('src', coverUrl).fadeTo(500, 1);
+        		$('.bottom-container').css('margin-left', $('.cover-image').width() + 'px');
         		coverCache = null;
         	};
 
@@ -98,6 +101,13 @@
 			Mousetrap.bind('esc', function(e) {
 				App.vent.trigger('movie:closeDetail');
 			});
+
+		$(window).resize(function () {
+        $('.bottom-container').css('margin-left', $('.cover-image').width() + 'px');
+    	});
+
+
+
 
 		},
 
