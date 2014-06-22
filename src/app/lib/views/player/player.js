@@ -316,7 +316,7 @@
         adjustVolume: function(i) {
             var v = this.player.volume();
             this.player.volume(v + i);
-            this.displayOverlayMsg(i18n.__('Volume')+': '+ this.player.volume().toFixed(1) * 100 + '%');
+            this.displayOverlayMsg(i18n.__('Volume:')+' '+ this.player.volume().toFixed(1) * 100 + '%');
         },
         
         toggleMute: function() {
@@ -360,7 +360,7 @@
         adjustSubtitleOffset: function(s) {
             var o = this.player.options()['trackTimeOffset'];
             this.player.options()['trackTimeOffset'] = (o + s);
-            this.displayOverlayMsg(i18n.__('Subtitles Offset')+': '+ this.player.options()['trackTimeOffset'].toFixed(1) +' '+i18n.__('secs'));
+            this.displayOverlayMsg(i18n.__('Subtitles Offset:')+' '+ this.player.options()['trackTimeOffset'].toFixed(1) +' '+i18n.__('secs'));
         },
         
         displayOverlayMsg: function(message){
