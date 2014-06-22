@@ -9,13 +9,15 @@ Utils.downloadSubtitle = function(data) {
 	var filePath = data.filePath;
 	var fileExt = filePath.split('.').pop();
 	var subExt = subUrl.split('.').pop();
+	var out = '';
+	var req = null;
 	if(subExt === 'zip') {
 		var zipPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'zip';
 
 		var unzipPath = filePath.substring(0,filePath.lastIndexOf('.'+fileExt));
 		unzipPath = unzipPath.substring(0, unzipPath.lastIndexOf('/'));
-		var out = fs.createWriteStream(zipPath);
-		var req = request(
+		out = fs.createWriteStream(zipPath);
+		req = request(
 			{
 				method: 'GET',
 				uri: subUrl,
@@ -32,8 +34,8 @@ Utils.downloadSubtitle = function(data) {
 	}
 	else if(subExt === 'srt') {
 		var srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
-		var out = fs.createWriteStream(srtPath);
-		var req = request(
+		out = fs.createWriteStream(srtPath);
+		req = request(
 			{
 				method: 'GET',
 				uri: subUrl,
@@ -43,4 +45,4 @@ Utils.downloadSubtitle = function(data) {
 		req.pipe(out);
 	}
 	return;
-}
+};

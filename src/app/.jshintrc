@@ -43,7 +43,8 @@
 		"Database": true,
 		"checkUpdate": true,
 		"detectLanguage": true,
-    "indexedDB": true,
+		"indexedDB": true,
+		"Utils": true,
 		
 		// Third party
 		"Backbone": true,

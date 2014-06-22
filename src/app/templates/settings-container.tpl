@@ -122,6 +122,12 @@
 			<input class="settings-checkbox" name="externalPlayer" id="cbPlayer" type="checkbox" <%=(Settings.externalPlayer? "checked='checked'":"")%>>
 			<label class="settings-label" for="cbPlayer"><%= i18n.__("Use external video player") %></label>
 			<br><br>
+			<!-- External Player Location -->
+			<p><%= i18n.__("Path to external player") %>: </p>
+			<input type="text" placeholder="<%= i18n.__("External Player") %>" id="fakeExternalPlayerLocation" value="<%= Settings.externalPlayerLocation %>" readonly="readonly" size="75" />
+			<input type="file" name="externalPlayerLocation" id="externalPlayerLocation" style="display: none;" nwworkingdir="<%= Settings.externalPlayerLocation %>" />
+			<br><br>
+			<!-- External Player Location / -->
 		</div>
 		<div class="btns">
 			<div class="btn-settings flush-bookmarks"><%= i18n.__("Flush bookmarks database") %></div>

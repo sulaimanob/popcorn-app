@@ -31,6 +31,7 @@ Settings.streamPort = 0; // 0 = Random
 Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
 Settings.deleteTmpOnClose = true;
 Settings.externalPlayer = false;
+Settings.externalPlayerLocation = '';
 
 // Hidden endpoints
 Settings.updateApiEndpoint = 'http://get-popcorn.com/';

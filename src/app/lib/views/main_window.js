@@ -250,12 +250,12 @@
 				console.log('Launching External Player: '+ filePath);
 				console.log('src: '+ streamModel.attributes.src);
 
-				/* This works for seeking etc but requires application/installation detection etc
-				process.exec('/Applications/VLC.app/Contents/MacOS/VLC '+ streamModel.attributes.src);
-				*/
+				// This works for seeking etc but requires application/installation detection etc
+				process.exec(Settings.externalPlayerLocation + ' ' +  streamModel.attributes.src);
+				
 
 				//Seeking does not work with below, above should be used in future, but for now it will do
-				gui.Shell.openItem(filePath);
+				//gui.Shell.openItem(filePath);
 			}
 			else {
 				this.Player.show(new App.View.Player({

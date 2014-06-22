@@ -154,5 +154,7 @@
 	"Failed!": "Failed!",
 	"Popcorn Time stores an encrypted hash of your password in your local database": "Popcorn Time stores an encrypted hash of your password in your local database",
 	"Use external video player": "Use external video player",
-	"playingExternally": "Playing in external video player"
+	"playingExternally": "Playing in external video player",
+	"Path to external player": "Path to external player",
+	"External Player": "External Player"
 }

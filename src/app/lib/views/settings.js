@@ -9,6 +9,8 @@
 			success_alert: '.success_alert',
 			fakeTempDir: '#faketmpLocation',
 			tempDir: '#tmpLocation',
+			fakeExternalDir: '#fakeExternalPlayerLocation',
+			externalDir: '#externalPlayerLocation'
 		},
 
 		events: {
@@ -18,11 +20,13 @@
 			'click .flush-databases': 'flushAllDatabase',
 			'click .flush-subtitles': 'flushAllSubtitles',
 			'click #faketmpLocation' : 'showCacheDirectoryDialog',
+			'click #fakeExternalPlayerLocation' : 'showExternalPlayerLocationDialog',
 			'click .default-settings' : 'resetSettings',
 			'keyup #traktUsername': 'checkTraktLogin',
 			'keyup #traktPassword': 'checkTraktLogin',
 			'click #unauthTrakt': 'disconnectTrakt',
 			'change #tmpLocation' : 'updateCacheDirectory',
+			'change #externalPlayerLocation' : 'updateExternalPlayerLocation'
 		},
 
 		onShow: function() {
@@ -79,6 +83,7 @@
 			case 'connectionLimit':
 			case 'dhtLimit':
 			case 'streamPort':
+			case 'externalPlayerLocation':
 				value = field.val();
 				break;
 			case 'traktUsername':
@@ -231,6 +236,18 @@
 			var that = this;
 			var field = $('#tmpLocation');
 			that.ui.fakeTempDir.val = field.val();
+			that.render();
+		},
+
+		showExternalPlayerLocationDialog : function() {
+			var that = this;
+			that.ui.externalDir.click();
+		},
+
+		updateExternalPlayerLocation : function(e) {
+			var that = this;
+			var field = $('#externalPlayerLocation');
+			that.ui.fakeExternalDir.val = field.val();
 			that.render();
 		},
 
