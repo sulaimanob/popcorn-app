@@ -33,14 +33,14 @@
 
         sorters: [
             'popularity',
-            'date',
+            'released',
             'year',
             'rating'
         ],
 
         sorters_tv: [
             'popularity',
-            'updated',
+            'aired',
             'year',
             'name'
         ],
