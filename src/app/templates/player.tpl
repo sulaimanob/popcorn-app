@@ -6,9 +6,9 @@
 			<div class="eye-info-player"></div>
 			<div class="details-info-player">
 				<div class="arrow-up"></div>
-				<span class="speed-info-player"><%= i18n.__("Download") %>:&nbsp;</span><span class="download_speed_player">0 B/s</span><br>
-				<span class="speed-info-player"><%= i18n.__("Upload") %>:&nbsp;</span><span class="upload_speed_player">0 B/s</span><br>
-				<span class="speed-info-player"><%= i18n.__("Active Peers") %>:&nbsp;</span><span class="active_peers_player">0</span>
+				<span class="speed-info-player"><%= i18n.__("Download:") %>&nbsp;</span><span class="download_speed_player">0 B/s</span><br>
+				<span class="speed-info-player"><%= i18n.__("Upload:") %>&nbsp;</span><span class="upload_speed_player">0 B/s</span><br>
+				<span class="speed-info-player"><%= i18n.__("Active Peers:") %>&nbsp;</span><span class="active_peers_player">0</span>
 			</div>
 		</div>
 	</div>
