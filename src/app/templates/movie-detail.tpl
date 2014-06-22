@@ -7,7 +7,7 @@ if(typeof runtime === "undefined"){ runtime = "N/A"; };
 
     <div data-bgr="<%= backdrop %>" class="backdrop-overlay"></div>
 
-
+<div class="close"></div>
 
 
     <div class="container">
