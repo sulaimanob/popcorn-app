@@ -1,7 +1,7 @@
 (function(App) {
     'use strict';
 
-    /**
+    /*
      * Manage movie browsing:
      *  * Create filter views
      *  * Create movie list
