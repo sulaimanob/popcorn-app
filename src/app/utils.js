@@ -2,6 +2,10 @@ var Utils = {};
 var request = require('request');
 var AdmZip = require('adm-zip');
 var fs = require('fs');
+var Q = require('q');
+var async = require('async');
+
+var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
 
 Utils.downloadSubtitle = function(data) {
 	console.log(data);
@@ -45,4 +49,28 @@ Utils.downloadSubtitle = function(data) {
 		req.pipe(out);
 	}
 	return;
+};
+
+Utils.findExternalPlayers = function() {
+	var defer = Q.defer();
+	var folderName = '/Applications';
+	var players = [];
+	fs.readdir(folderName, function(err, data) {
+		if(err) {
+			defer.reject(err);
+		}
+		async.forEach(
+			data, 
+			function(d, cb) {
+				if(externalPlayers.indexOf(d.replace('.app', '')) !== -1) {
+					players.push({name: d.replace('.app', ''), path: folderName + '/' + d});
+				}
+				cb();
+			},
+			function(err, data) {
+				defer.resolve(players);
+			}
+		);
+	});
+	return defer.promise;
 };

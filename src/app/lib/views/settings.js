@@ -32,8 +32,25 @@
 		onShow: function() {
 			$('.filter-bar').hide();
 			$('#movie-detail').hide();
+			var that = this;
 			Mousetrap.bind('backspace', function(e) {
 				App.vent.trigger('settings:close');
+			});
+
+			Utils.findExternalPlayers().then(function(data) {
+				if(data.length === 0) {
+					$('#external_player_select option:contains("Loading...")').text('No Players Found');
+				}
+				else { 
+					$('#external_player_select option').remove();
+					for(var p in data) {
+						$('#external_player_select').append('<option value = '+ data[p].path.split(' ').join('&nbsp;') +'>'+ data[p].name +'</option>');
+					}
+					$('#external_player_select').val(App.settings.externalPlayerLocation);
+				}
+			})
+			.catch(function (error) {
+				$('#external_player_select option:contains("Loading...")').text('No Players Found');
 			});
 		},
 
@@ -69,6 +86,7 @@
 			case 'subtitle_size':
 			case 'subtitle_language':
 			case 'movies_quality':
+			case 'external_player_select':
 				value = $('option:selected', field).val();
 				break;
 			case 'language':
@@ -77,7 +95,6 @@
 				break;
 			case 'moviesShowQuality':
 			case 'deleteTmpOnClose':
-			case 'externalPlayer':
 				value = field.is(':checked');
 				break;
 			case 'connectionLimit':
@@ -91,6 +108,21 @@
 				return;
 			case 'tmpLocation':
 				value = path.join(field.val(), 'Popcorn-Time');
+				break;
+			case 'externalPlayer':
+				value = field.is(':checked');
+				if(value) {
+					if(App.settings.os === 'mac') {
+						$('#externalPlayerDropdown').show();
+					}
+					else {
+						$('#externalPlayerInput').show();
+					}
+				}
+				else {
+					$('#externalPlayerInput').hide();
+					$('#externalPlayerDropdown').hide();
+				}
 				break;
 			default:
 				win.warn('Setting not defined: '+field.attr('name'));
