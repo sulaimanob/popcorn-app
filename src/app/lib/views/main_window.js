@@ -241,13 +241,13 @@
 		showPlayer: function(streamModel) {
 			console.log(streamModel);
 			console.log('External: '+ Settings.externalPlayer);
-			if(Settings.externalPlayer) {
+			if(Settings.externalPlayer && Settings.externalPlayerLocation !== -1) {
 				var filePath = streamModel.attributes.engine.path;
 				filePath += '/';
 				filePath += streamModel.attributes.engine.files[0].path;
 
 
-				console.log('Launching External Player: '+ filePath);
+				console.log('Launching External Player: '+ Settings.externalPlayerLocation + ' ' +  streamModel.attributes.src);
 				console.log('src: '+ streamModel.attributes.src);
 
 				// This works for seeking etc but requires application/installation detection etc
