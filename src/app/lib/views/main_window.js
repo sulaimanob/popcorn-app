@@ -245,13 +245,17 @@
 				var filePath = streamModel.attributes.engine.path;
 				filePath += '/';
 				filePath += streamModel.attributes.engine.files[0].path;
+				var cmd = Settings.externalPlayerLocation;
 
+				if(Settings.os === 'mac') {
+					cmd +=  Utils.getPlayerCmd(Settings.externalPlayerLocation);
+				}
 
-				console.log('Launching External Player: '+ Settings.externalPlayerLocation + ' ' +  streamModel.attributes.src);
+				console.log('Launching External Player: '+ cmd + ' ' +  streamModel.attributes.src);
 				console.log('src: '+ streamModel.attributes.src);
 
 				// This works for seeking etc but requires application/installation detection etc
-				process.exec(Settings.externalPlayerLocation + Utils.playerCmds['VLC'] + ' '+  streamModel.attributes.src);
+				process.exec(cmd + ' '+  streamModel.attributes.src);
 				
 
 				//Seeking does not work with below, above should be used in future, but for now it will do

@@ -5,9 +5,10 @@ var fs = require('fs');
 var Q = require('q');
 var async = require('async');
 
-var externalPlayers = ['VLC'];
+var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
 var playerCmds = [];
 playerCmds['VLC'] = '/Contents/MacOS/VLC';
+playerCmds['MPlayer OSX Extended'] = '/Contents/MacOS/MPlayer OSX Extended';
 
 Utils.downloadSubtitle = function(data) {
 	console.log(data);
@@ -75,4 +76,13 @@ Utils.findExternalPlayers = function() {
 		);
 	});
 	return defer.promise;
+};
+
+Utils.getPlayerName = function(path) {
+	return path.split('/').pop().replace('.app', '');
+};
+
+Utils.getPlayerCmd = function(path) {
+	var name = Utils.getPlayerName(path);
+	return playerCmds[name];
 };

@@ -101,7 +101,7 @@
 			case 'dhtLimit':
 			case 'streamPort':
 			case 'externalPlayerLocation':
-				value = field.val();
+				value = field.val().split('\u00A0').join(' ');
 				break;
 			case 'traktUsername':
 			case 'traktPassword':
