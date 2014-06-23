@@ -5,7 +5,9 @@ var fs = require('fs');
 var Q = require('q');
 var async = require('async');
 
-var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
+var externalPlayers = ['VLC'];
+var playerCmds = [];
+playerCmds['VLC'] = '/Contents/MacOS/VLC';
 
 Utils.downloadSubtitle = function(data) {
 	console.log(data);

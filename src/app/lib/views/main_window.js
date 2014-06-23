@@ -251,7 +251,7 @@
 				console.log('src: '+ streamModel.attributes.src);
 
 				// This works for seeking etc but requires application/installation detection etc
-				process.exec(Settings.externalPlayerLocation + ' ' +  streamModel.attributes.src);
+				process.exec(Settings.externalPlayerLocation + Utils.playerCmds['VLC'] + ' '+  streamModel.attributes.src);
 				
 
 				//Seeking does not work with below, above should be used in future, but for now it will do
