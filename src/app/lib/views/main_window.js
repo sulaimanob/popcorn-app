@@ -252,7 +252,7 @@
 					cmd +=  Utils.getPlayerCmd(Settings.externalPlayerLocation);
 				}
 
-				var srtPath = '""';
+				var srtPath = '';
 
 				if(Settings.subtitle_language !== 'none') {
 					var fileExt = filePath.split('.').pop();
