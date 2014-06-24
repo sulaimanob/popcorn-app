@@ -3,6 +3,7 @@
 
 	var _this;
 	var process = require('child_process');
+	var path = require('path');
 	var MainWindow = Backbone.Marionette.Layout.extend({
 		template: '#main-window-tpl',
 
@@ -242,17 +243,22 @@
 			console.log(streamModel);
 			console.log('External: '+ Settings.externalPlayer);
 			if(Settings.externalPlayer && Settings.externalPlayerLocation !== -1) {
-				var filePath = streamModel.attributes.engine.path;
-				filePath += '/';
-				filePath += streamModel.attributes.engine.files[0].path;
-				var cmd = Settings.externalPlayerLocation;
+				var filePath = path.join(streamModel.attributes.engine.path, 
+					streamModel.attributes.engine.files[0].path);
+
+				var cmd = '"'+ Settings.externalPlayerLocation +'"'; // So it behaves when spaces in path
 
 				if(Settings.os === 'mac') {
 					cmd +=  Utils.getPlayerCmd(Settings.externalPlayerLocation);
 				}
 
-				console.log('Launching External Player: '+ cmd + ' ' +  streamModel.attributes.src);
-				console.log('src: '+ streamModel.attributes.src);
+				if(Settings.subtitle_language !== 'none') {
+					var fileExt = filePath.split('.').pop();
+					var srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
+					cmd += Utils.getSubtitleSwtich(Settings.externalPlayerLocation) + '"'+ srtPath + '"';
+				}
+
+				win.info('Launching External Player: '+ cmd + ' ' +  streamModel.attributes.src);
 
 				// This works for seeking etc but requires application/installation detection etc
 				process.exec(cmd + ' '+  streamModel.attributes.src);

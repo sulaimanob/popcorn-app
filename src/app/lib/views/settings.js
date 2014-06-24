@@ -44,7 +44,7 @@
 				else { 
 					$('#external_player_select option').remove();
 					for(var p in data) {
-						$('#external_player_select').append('<option value = '+ data[p].path.split(' ').join('&nbsp;') +'>'+ data[p].name +'</option>');
+						$('#external_player_select').append('<option value = '+ data[p].path.replaceAll(' ', '&nbsp;') +'>'+ data[p].name +'</option>');
 					}
 					$('#external_player_select').val(App.settings.externalPlayerLocation);
 				}
@@ -101,7 +101,7 @@
 			case 'dhtLimit':
 			case 'streamPort':
 			case 'externalPlayerLocation':
-				value = field.val().split('\u00A0').join(' ');
+				value = field.val().replaceAll('\u00A0', ' ');
 				break;
 			case 'traktUsername':
 			case 'traktPassword':

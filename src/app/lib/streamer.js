@@ -7,6 +7,7 @@
     var readTorrent = require('read-torrent');
     var peerflix = require('peerflix');
     var mime = require('mime');
+    var path = require('path');
 
     var engine = null;
     var statsUpdater = null;
@@ -16,6 +17,7 @@
     var subtitles = null;
     var hasSubtitles = false;
     var externalPlayer = false;
+    var subtitleDownloaded = false;
 
 
     var watchState = function(stateModel) {
@@ -40,12 +42,13 @@
             }
 
             if(hasSubtitles && subtitles !== null && 
-            externalPlayer && Settings.subtitle_language !== 'none') { 
+            externalPlayer && Settings.subtitle_language !== 'none' && engine.files[0] && !subtitleDownloaded) { 
             // download default subtitles for external player, we don't care when it's done really, so don't stop video playing
                 Utils.downloadSubtitle({
                     url: subtitles[Settings.subtitle_language], 
-                    filePath: engine.path + '/' + engine.files[0].path
+                    filePath: path.join(engine.path, engine.files[0].path)
                 });
+                subtitleDownloaded = true;
             }
 
             stateModel.set('state', state);

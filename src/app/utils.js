@@ -7,17 +7,23 @@ var async = require('async');
 
 var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
 var playerCmds = [];
+var subsSwitch = [];
 playerCmds['VLC'] = '/Contents/MacOS/VLC';
 playerCmds['MPlayer OSX Extended'] = '/Contents/MacOS/MPlayer OSX Extended';
 
+subsSwitch['VLC'] = ' --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
+subsSwitch['MPlayer OSX Extended'] = ' -sub ';
+
 Utils.downloadSubtitle = function(data) {
-	console.log(data);
 	var subUrl = data.url;
 	var filePath = data.filePath;
+	var fileFolder = filePath.substring(0, filePath.lastIndexOf('/'));
 	var fileExt = filePath.split('.').pop();
 	var subExt = subUrl.split('.').pop();
 	var out = '';
 	var req = null;
+
+	fs.mkdirSync(fileFolder);
 	if(subExt === 'zip') {
 		var zipPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'zip';
 
@@ -37,6 +43,7 @@ Utils.downloadSubtitle = function(data) {
 			zipEntries = zip.getEntries();
 			zip.extractAllTo(/*target path*/unzipPath, /*overwrite*/true);
 			fs.unlink(zipPath, function(err){});
+			win.debug('Subtitle extracted to : '+ unzipPath);
 		});
 	}
 	else if(subExt === 'srt') {
@@ -50,6 +57,9 @@ Utils.downloadSubtitle = function(data) {
 		);
 
 		req.pipe(out);
+		req.on('end', function() {
+			win.debug('Subtitle downloaded to : '+ srtPath);
+		});
 	}
 	return;
 };
@@ -79,10 +89,20 @@ Utils.findExternalPlayers = function() {
 };
 
 Utils.getPlayerName = function(path) {
-	return path.split('/').pop().replace('.app', '');
+	return path.split('/').pop().replace('.app', '').replace('.exe', '');
 };
 
 Utils.getPlayerCmd = function(path) {
 	var name = Utils.getPlayerName(path);
 	return playerCmds[name];
+};
+
+Utils.getSubtitleSwtich = function(path) {
+	var name = Utils.getPlayerName(path);
+	for(var p in externalPlayers) {
+		if(name.toLowerCase() === externalPlayers[p].toLowerCase()) {
+			return subsSwitch[externalPlayers[p]];
+		}
+	}
+	return '';
 };
