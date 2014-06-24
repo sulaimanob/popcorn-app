@@ -13,7 +13,7 @@ playerCmds['VLC'] = '/Contents/MacOS/VLC';
 playerCmds['MPlayer OSX Extended'] = '/Contents/Resources/Binaries/mpextended.mpBinaries/Contents/MacOS/mplayer';
 
 subsSwitch['VLC'] = ' --no-video-title --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
-subsSwitch['MPlayer OSX Extended'] = ' -sub ';
+subsSwitch['MPlayer OSX Extended'] = ' -font "/Library/Fonts/Arial Bold.ttf" -sub ';
 
 Utils.downloadSubtitle = function(data) {
 	var subUrl = data.url;
