@@ -252,11 +252,14 @@
 					cmd +=  Utils.getPlayerCmd(Settings.externalPlayerLocation);
 				}
 
+				var srtPath = '""';
+
 				if(Settings.subtitle_language !== 'none') {
 					var fileExt = filePath.split('.').pop();
-					var srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
-					cmd += Utils.getSubtitleSwtich(Settings.externalPlayerLocation) + '"'+ srtPath + '"';
+					srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
 				}
+
+				cmd += Utils.getSubtitleSwtich(Settings.externalPlayerLocation) + '"'+ srtPath + '"';
 
 				win.info('Launching External Player: '+ cmd + ' ' +  streamModel.attributes.src);
 
