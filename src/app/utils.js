@@ -4,6 +4,7 @@ var AdmZip = require('adm-zip');
 var fs = require('fs');
 var Q = require('q');
 var async = require('async');
+var path = require('path');
 
 var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
 var playerCmds = [];
@@ -17,18 +18,23 @@ subsSwitch['MPlayer OSX Extended'] = ' -sub ';
 Utils.downloadSubtitle = function(data) {
 	var subUrl = data.url;
 	var filePath = data.filePath;
-	var fileFolder = filePath.substring(0, filePath.lastIndexOf('/'));
-	var fileExt = filePath.split('.').pop();
+	var fileFolder = path.dirname(filePath);
+	var fileExt = path.extname(filePath);
 	var subExt = subUrl.split('.').pop();
 	var out = '';
 	var req = null;
 
-	fs.mkdirSync(fileFolder);
+	try {
+		fs.mkdirSync(fileFolder);
+	} catch(e) {
+		// Ignore EEXIST
+	}
 	if(subExt === 'zip') {
-		var zipPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'zip';
+		var zipPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + '.zip';
 
 		var unzipPath = filePath.substring(0,filePath.lastIndexOf('.'+fileExt));
 		unzipPath = unzipPath.substring(0, unzipPath.lastIndexOf('/'));
+		
 		out = fs.createWriteStream(zipPath);
 		req = request(
 			{
@@ -47,7 +53,7 @@ Utils.downloadSubtitle = function(data) {
 		});
 	}
 	else if(subExt === 'srt') {
-		var srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
+		var srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + '.srt';
 		out = fs.createWriteStream(srtPath);
 		req = request(
 			{
@@ -88,17 +94,17 @@ Utils.findExternalPlayers = function() {
 	return defer.promise;
 };
 
-Utils.getPlayerName = function(path) {
-	return path.split('/').pop().replace('.app', '').replace('.exe', '');
+Utils.getPlayerName = function(loc) {
+	return path.basename(loc).replace(path.extname(loc), '');
 };
 
-Utils.getPlayerCmd = function(path) {
-	var name = Utils.getPlayerName(path);
+Utils.getPlayerCmd = function(loc) {
+	var name = Utils.getPlayerName(loc);
 	return playerCmds[name];
 };
 
-Utils.getSubtitleSwtich = function(path) {
-	var name = Utils.getPlayerName(path);
+Utils.getSubtitleSwtich = function(loc) {
+	var name = Utils.getPlayerName(loc);
 	for(var p in externalPlayers) {
 		if(name.toLowerCase() === externalPlayers[p].toLowerCase()) {
 			return subsSwitch[externalPlayers[p]];
