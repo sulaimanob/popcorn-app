@@ -11,7 +11,7 @@ var subsSwitch = [];
 playerCmds['VLC'] = '/Contents/MacOS/VLC';
 playerCmds['MPlayer OSX Extended'] = '/Contents/MacOS/MPlayer OSX Extended';
 
-subsSwitch['VLC'] = ' --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
+subsSwitch['VLC'] = ' --no-video-title --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
 subsSwitch['MPlayer OSX Extended'] = ' -sub ';
 
 Utils.downloadSubtitle = function(data) {
