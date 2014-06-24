@@ -123,7 +123,7 @@
 			<label class="settings-label" for="cbPlayer"><%= i18n.__("Use external video player") %></label>
 			<br><br>
 			<!-- External Player Location -->
-			<div id = "externalPlayerInput" <%= Settings.externalPlayer? "" : "style= display:none" %>>
+			<div id = "externalPlayerInput" <%= Settings.externalPlayer && !Settings.os ==='mac'? "" : "style= display:none" %>>
 				<p><%= i18n.__("Path to external player") %>: </p>
 				<input type="text" placeholder="<%= i18n.__("External Player") %>" id="fakeExternalPlayerLocation" value="<%= Settings.externalPlayerLocation %>" readonly="readonly" size="75" />
 				<input type="file" name="externalPlayerLocation" id="externalPlayerLocation" style="display: none;" nwworkingdir="<%= Settings.externalPlayerLocation %>" />

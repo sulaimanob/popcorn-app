@@ -245,12 +245,12 @@
 			if(Settings.externalPlayer && Settings.externalPlayerLocation !== -1) {
 				var filePath = path.join(streamModel.attributes.engine.path, 
 					streamModel.attributes.engine.files[0].path);
-
-				var cmd = '"'+ Settings.externalPlayerLocation +'"'; // So it behaves when spaces in path
-
+				var extraCmd = '';
 				if(Settings.os === 'mac') {
-					cmd +=  Utils.getPlayerCmd(Settings.externalPlayerLocation);
+					extraCmd =  Utils.getPlayerCmd(Settings.externalPlayerLocation);
 				}
+
+				var cmd = '"'+ Settings.externalPlayerLocation + extraCmd +'"'; // So it behaves when spaces in path
 
 				var srtPath = '';
 
