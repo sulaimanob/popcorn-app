@@ -12,7 +12,7 @@ var playerSwitches = [];
 playerCmds['VLC'] = '/Contents/MacOS/VLC';
 playerCmds['MPlayer OSX Extended'] = '/Contents/Resources/Binaries/mpextended.mpBinaries/Contents/MacOS/mplayer';
 
-playerSwitches['VLC'] = ' --no-video-title --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
+playerSwitches['VLC'] = ' --no-video-title-show --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
 playerSwitches['MPlayer OSX Extended'] = ' -font "/Library/Fonts/Arial Bold.ttf" -sub ';
 playerSwitches['mpv'] = ' -sub ';
 
