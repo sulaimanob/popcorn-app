@@ -8,12 +8,13 @@ var path = require('path');
 
 var externalPlayers = ['VLC', 'MPlayer OSX Extended'];
 var playerCmds = [];
-var subsSwitch = [];
+var playerSwitches = [];
 playerCmds['VLC'] = '/Contents/MacOS/VLC';
 playerCmds['MPlayer OSX Extended'] = '/Contents/Resources/Binaries/mpextended.mpBinaries/Contents/MacOS/mplayer';
 
-subsSwitch['VLC'] = ' --no-video-title --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
-subsSwitch['MPlayer OSX Extended'] = ' -font "/Library/Fonts/Arial Bold.ttf" -sub ';
+playerSwitches['VLC'] = ' --no-video-title --sub-filter=marq --marq-marquee="Streaming From Popcorn Time" --marq-position=8 --marq-timeout=3000 --sub-file=';
+playerSwitches['MPlayer OSX Extended'] = ' -font "/Library/Fonts/Arial Bold.ttf" -sub ';
+playerSwitches['mpv'] = ' -sub ';
 
 Utils.downloadSubtitle = function(data) {
 	var subUrl = data.url;
@@ -103,11 +104,11 @@ Utils.getPlayerCmd = function(loc) {
 	return playerCmds[name];
 };
 
-Utils.getSubtitleSwtich = function(loc) {
+Utils.getPlayerSwitch = function(loc) {
 	var name = Utils.getPlayerName(loc);
 	for(var p in externalPlayers) {
 		if(name.toLowerCase() === externalPlayers[p].toLowerCase()) {
-			return subsSwitch[externalPlayers[p]];
+			return playerSwitches[externalPlayers[p]];
 		}
 	}
 	return '';

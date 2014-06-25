@@ -240,12 +240,12 @@
 		},
 
 		showPlayer: function(streamModel) {
-			console.log(streamModel);
-			console.log('External: '+ Settings.externalPlayer);
 			if(Settings.externalPlayer && Settings.externalPlayerLocation !== -1) {
 				var filePath = path.join(streamModel.attributes.engine.path, 
 					streamModel.attributes.engine.files[0].path);
-				var extraCmd = '';
+
+				var extraCmd = ''; // MAC needs to delve into the .app to get the actual executable
+				
 				if(Settings.os === 'mac') {
 					extraCmd =  Utils.getPlayerCmd(Settings.externalPlayerLocation);
 				}
@@ -255,11 +255,11 @@
 				var srtPath = '';
 
 				if(Settings.subtitle_language !== 'none') {
-					var fileExt = filePath.split('.').pop();
-					srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + 'srt';
+					var fileExt = path.extname(filePath);
+					srtPath = filePath.substring(0,filePath.lastIndexOf(fileExt)) + '.srt'; // TODO: Make sure this exists
 				}
 
-				cmd += Utils.getSubtitleSwtich(Settings.externalPlayerLocation) + '"'+ srtPath + '"';
+				cmd += Utils.getPlayerSwitch(Settings.externalPlayerLocation) + '"'+ srtPath + '"';
 
 				win.info('Launching External Player: '+ cmd + ' ' +  streamModel.attributes.src);
 
