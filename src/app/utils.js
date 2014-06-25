@@ -76,21 +76,23 @@ Utils.findExternalPlayers = function() {
 	var folderName = '/Applications';
 	var players = [];
 	fs.readdir(folderName, function(err, data) {
-		if(err  || !data) {
+		if(err  || !data.length) {
 			defer.reject(err);
 		}
-		async.forEach(
-			data, 
-			function(d, cb) {
-				if(externalPlayers.indexOf(d.replace('.app', '')) !== -1) {
-					players.push({name: d.replace('.app', ''), path: folderName + '/' + d});
+		if(data) {
+			async.forEach(
+				data, 
+				function(d, cb) {
+					if(externalPlayers.indexOf(d.replace('.app', '')) !== -1) {
+						players.push({name: d.replace('.app', ''), path: folderName + '/' + d});
+					}
+					cb();
+				},
+				function(err, data) {
+					defer.resolve(players);
 				}
-				cb();
-			},
-			function(err, data) {
-				defer.resolve(players);
-			}
-		);
+			);
+		}
 	});
 	return defer.promise;
 };
