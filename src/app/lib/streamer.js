@@ -307,6 +307,7 @@
             engine = null;
             subtitles = null; // reset subtitles to make sure they will not be used in next session.
             hasSubtitles = false;
+            subtitleDownloaded = false;
             win.info('Streaming cancelled');
         }
     };
