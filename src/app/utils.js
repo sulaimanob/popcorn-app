@@ -76,7 +76,7 @@ Utils.findExternalPlayers = function() {
 	var folderName = '/Applications';
 	var players = [];
 	fs.readdir(folderName, function(err, data) {
-		if(err) {
+		if(err  || !data) {
 			defer.reject(err);
 		}
 		async.forEach(
