@@ -47,7 +47,7 @@
 						$('#external_player_select').append('<option value = '+ data[p].path.replaceAll(' ', '&nbsp;') +'>'+ data[p].name +'</option>');
 						console.log(data[p].path.replaceAll(' ', '&nbsp;'));
 					}
-					$('#external_player_select').val(App.settings.externalPlayerLocationreplaceAll(' ', '&nbsp;'));
+					$('#external_player_select').val(App.settings.externalPlayerLocationreplaceAll(' ', '&nbsp;')).change();
 				}
 			})
 			.catch(function (error) {
