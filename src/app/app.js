@@ -163,6 +163,10 @@ String.prototype.endsWith = function (suffix) {
 String.prototype.replaceAll = function(target, replacement) {
   return this.split(target).join(replacement);
 };
+
+String.prototype.isEmpty = function() {
+    return (this.length === 0 || !this.trim());
+};
 // Developer Shortcuts
 Mousetrap.bind(['shift+f12', 'f12', 'command+0'], function (e) {
 	win.showDevTools();
