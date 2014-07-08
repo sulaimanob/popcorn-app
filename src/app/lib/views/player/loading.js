@@ -33,15 +33,17 @@
             });
             win.info('Loading torrent');
                 this.listenTo(this.model, 'change:state', this.onStateUpdate);
-
-                var player = $('#player');
-                player.css({position: 'absolute'});
-                player.animate({width: '100%',
-                                height: '100%',
-                                bottom: '0px',
-                                right: '0px',
-                               }, 500);
-                App.vent.trigger('player:maximize');
+            this.maximize();
+        },
+        maximize: function() {
+            var player = $('#player');
+            player.css({position: 'absolute'});
+            player.animate({width: '100%',
+                            height: '100%',
+                            bottom: '0px',
+                            right: '0px'
+                           }, 500);
+            App.vent.trigger('player:maximize');
         },
         onShow: function() {
             $('.filter-bar').hide();

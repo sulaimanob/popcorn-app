@@ -192,15 +192,7 @@
                 if (r + g + b < 10) {
                     _this.bf++;
                     if (_this.bf === 3) {
-                        console.log('resizing');
-                        var player = $('#player');
-                        player.css({position: 'absolute'});
-                        player.animate({width: '20%',
-                                        height: '20%',
-                                        bottom: '60px',
-                                        right: '90px',
-                                       }, 2000);
-                        App.vent.trigger('player:minimize');
+                        _this.minimize();
                     }
                 } else {
                     _this.bf = 0;
@@ -356,6 +348,27 @@
             $('.player-header-background').appendTo('div#video_player');
         },
 
+        minimize: function () {
+            var player = $('#player');
+            player.css({position: 'absolute'});
+            player.animate({width: '20%',
+                            height: '20%',
+                            bottom: '60px',
+                            right: '90px',
+                           }, 2000);
+            App.vent.trigger('player:minimize');
+        },
+
+        maximize: function() {
+            var player = $('#player');
+            player.css({position: 'absolute'});
+            player.animate({width: '100%',
+                            height: '100%',
+                            bottom: '0px',
+                            right: '0px'
+                           }, 500);
+            App.vent.trigger('player:maximize');
+        },
         toggleMouseDebug: function() {
             if (this.player.debugMouse_) {
                 this.player.debugMouse_ = false;
