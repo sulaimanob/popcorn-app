@@ -3,8 +3,6 @@
     var Q = require('q');
 
     var Favorites = function() {};
-
-    Favorites.prototype = new App.Providers.Eztv();
     Favorites.prototype.constructor = Favorites;
 
     var queryTorrents = function(filters) {
@@ -18,7 +16,6 @@
     };
 
     var formatForPopcorn = function(items) {
-        var d = Q.defer();
         var movieList = [];
 
         items.forEach(function(movie) {
@@ -57,15 +54,11 @@
             movieList.push(deferred.promise);
         });
 
-        Q.all(movieList).done(function (results) {
-            return d.resolve({results: results, hasMore: false});
-        });
-
-        return d.promise;
+        return Q.all(movieList);
     };    
 
     Favorites.prototype.extractIds = function(items) {
-        return _.pluck(items.results, 'imdb_id');
+        return _.pluck(items, 'imdb_id');
     };
 
     Favorites.prototype.fetch = function(filters) {
