@@ -189,7 +189,6 @@
                 g = Math.ceil(g / (frame.data.length / 4));
                 b = Math.ceil(b / (frame.data.length / 4));
 
-                console.log (r, g, b);
                 if (r + g + b < 10) {
                     _this.bf++;
                     if (_this.bf === 3) {
