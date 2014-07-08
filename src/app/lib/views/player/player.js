@@ -358,16 +358,7 @@
 				display: 'inherit'
 			});
 
-			var player = $('#player');
-			player.css({
-				position: 'absolute'
-			});
-			player.animate({
-				width: '20%',
-				height: '20%',
-				bottom: '60px',
-				right: '90px',
-			}, 2000);
+			var player = $('#player').removeClass('fullsize-player');
 			App.vent.trigger('player:minimize');
 		},
 
@@ -379,16 +370,7 @@
 				display: 'none'
 			});
 
-			var player = $('#player');
-			player.css({
-				position: 'absolute'
-			});
-			player.animate({
-				width: '100%',
-				height: '100%',
-				bottom: '0px',
-				right: '0px'
-			}, 500);
+			var player = $('#player').addClass('fullsize-player');
 			App.vent.trigger('player:maximize');
 		},
 		toggleMouseDebug: function() {
