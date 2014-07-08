@@ -1,5 +1,12 @@
 #Popcorn Time [![Dependency Status](https://david-dm.org/popcorn-official/popcorn-app.svg)](https://david-dm.org/popcorn-official/popcorn-app) [![Build Status](https://travis-ci.org/popcorn-official/popcorn-app.svg?branch=dev-0.3)](https://travis-ci.org/popcorn-official/popcorn-app)
 
+### External Player Branch
+This branch contains the WIP feature of setting PT up to automatically stream to VLC, MPlayer etc.
+
+**Current state:** Works, Subtitles are restricted to working in VLC and MPlayer OS X Extended though
+
+**How to Use:** Go into Settings, check the "Use Exernal Player" box and select either the executable in a file browser (Windows and Linux) or select from the dropdown menu (OS X)
+
 ### Idea
 
 To allow any computer user to watch movies easily streaming from torrents, without any particular knowledge.
