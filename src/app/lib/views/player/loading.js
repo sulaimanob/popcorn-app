@@ -32,7 +32,7 @@
                 that.cancelStreaming();
             });
             win.info('Loading torrent');
-                this.listenTo(this.model, 'change:state', this.onStateUpdate);
+            this.listenTo(this.model, 'change:state', this.onStateUpdate);
             this.maximize();
         },
         maximize: function() {
@@ -74,6 +74,7 @@
         cancelStreaming: function() {
             App.vent.trigger('stream:stop');
             App.vent.trigger('player:close');
+            $('#player').removeClass('fullsize-player');
             $('.filter-bar').show();
             Mousetrap.bind('esc', function(e) {
                 App.vent.trigger('show:closeDetail');
