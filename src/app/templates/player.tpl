@@ -12,6 +12,10 @@
 			</div>
 		</div>
 	</div>
+        <div class="minimized-controls">
+             <span class="player-maximize">
+             <span class="close-info-player">
+        </div>
 </div>
 <%
 	var subArray = [];
@@ -45,3 +49,4 @@
 	<source src="<%= src %>" type="<%= type %>" />
 	<%=subtracks%>
 </video>
+<canvas id="eop" style="display : none;"/>

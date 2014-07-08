@@ -15,7 +15,9 @@
         events: {
             'click .close-info-player': 'closePlayer',
             'click .vjs-fullscreen-control': 'toggleFullscreen',
-            'click .vjs-subtitles-button': 'toggleSubtitles'
+            'click .vjs-subtitles-button': 'toggleSubtitles',
+            'click .player-minimize': 'minimize',
+            'click .player-maximize': 'maximize'
         },
 
         isMovie: function() {
@@ -78,6 +80,9 @@
             }
 
             this.video.dispose();
+            var player = $('#player');
+            player.removeAttr('style');
+
             App.vent.trigger('player:close');
         },
 
@@ -123,6 +128,11 @@
             var player = this.video.player();
             this.player = player;
 
+            var canvas = $('canvas')[0];
+            this.sctxt = canvas.getContext('2d');
+
+            this.vel = $('video')[0];
+
             /* The following is a hack to make VideoJS listen to
                mouseup instead of mousedown for pause/play on the 
                video element. Stops video pausing/playing when
@@ -159,6 +169,38 @@
                 }
             };
 
+            var checkColor = function() {
+                // Check if >80% before even looking at anything.
+                if(! _this.video || _this.video.currentTime() / _this.video.duration() < 0.8) {
+                    return;
+                }
+
+                _this.sctxt.drawImage(_this.vel, 0, 0, 320, 160);
+                var frame = _this.sctxt.getImageData(0, 0, 320, 160);
+
+                var r = 0,
+                    g = 0,
+                    b = 0;
+                // calculate average color from image in canvas
+                for (var i = 0; i < frame.data.length; i += 4) {
+                    r += frame.data[i];
+                    g += frame.data[i + 1];
+                    b += frame.data[i + 2];
+                }
+                r = Math.ceil(r / (frame.data.length / 4));
+                g = Math.ceil(g / (frame.data.length / 4));
+                b = Math.ceil(b / (frame.data.length / 4));
+
+                if (r + g + b < 10) {
+                    _this.bf++;
+                    if (_this.bf === 3) {
+                        _this.minimize();
+                    }
+                } else {
+                    _this.bf = 0;
+                }
+            };
+
             player.one('play', function() {
                 player.one('durationchange', sendToTrakt);
                 _this._WatchingTimer = setInterval(sendToTrakt, 10 * 60 * 1000); // 10 minutes
@@ -172,6 +214,8 @@
                     sendToTrakt();
                     _this.wasSeek = false;
                 }
+
+                _this._ColorTimer = setInterval(checkColor, 1000); // 1 second
             });
 
             player.on('pause', function() {
@@ -179,6 +223,10 @@
                     _this.wasSeek = true;
                 } else {
                     _this.wasSeek = false;
+                }
+
+                if(this._ColorTimer) {
+                    clearInterval(this._ColorTimer);
                 }
             });
 
@@ -302,6 +350,33 @@
             $('.player-header-background').appendTo('div#video_player');
         },
 
+        minimize: function () {
+            $('.details-player').css({display: "none"});
+            $('.minimized-controls').css({display: "inherit"});
+
+            var player = $('#player');
+            player.css({position: 'absolute'});
+            player.animate({width: '20%',
+                            height: '20%',
+                            bottom: '60px',
+                            right: '90px',
+                           }, 2000);
+            App.vent.trigger('player:minimize');
+        },
+
+        maximize: function() {
+            $('.details-player').css({display: "inherit"});
+            $('.minimized-controls').css({display: "none"});
+
+            var player = $('#player');
+            player.css({position: 'absolute'});
+            player.animate({width: '100%',
+                            height: '100%',
+                            bottom: '0px',
+                            right: '0px'
+                           }, 500);
+            App.vent.trigger('player:maximize');
+        },
         toggleMouseDebug: function() {
             if (this.player.debugMouse_) {
                 this.player.debugMouse_ = false;
@@ -408,6 +483,10 @@
             if (this._WatchingTimer) {
                 clearInterval(this._WatchingTimer);
             }
+            if(this._ColorTimer) {
+                clearInterval(this._ColorTimer);
+            }
+
         }
 
     });
