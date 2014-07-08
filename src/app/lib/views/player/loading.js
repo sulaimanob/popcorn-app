@@ -36,7 +36,7 @@
             this.maximize();
         },
         maximize: function() {
-            var player = $('#player').addClass('fullsize-player');
+            $('#player').addClass('fullsize-player');
             App.vent.trigger('player:maximize');
         },
         onShow: function() {

@@ -351,26 +351,12 @@
 		},
 
 		minimize: function() {
-			$('.details-player').css({
-				display: 'none'
-			});
-			$('.minimized-controls').css({
-				display: 'inherit'
-			});
-
-			var player = $('#player').removeClass('fullsize-player');
+			$('#player').removeClass('fullsize-player');
 			App.vent.trigger('player:minimize');
 		},
 
 		maximize: function() {
-			$('.details-player').css({
-				display: 'inherit'
-			});
-			$('.minimized-controls').css({
-				display: 'none'
-			});
-
-			var player = $('#player').addClass('fullsize-player');
+			$('#player').addClass('fullsize-player');
 			App.vent.trigger('player:maximize');
 		},
 		toggleMouseDebug: function() {
