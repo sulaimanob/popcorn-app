@@ -351,6 +351,9 @@
         },
 
         minimize: function () {
+            $('.details-player').css({display: "none"});
+            $('.minimized-controls').css({display: "inherit"});
+
             var player = $('#player');
             player.css({position: 'absolute'});
             player.animate({width: '20%',
@@ -362,6 +365,9 @@
         },
 
         maximize: function() {
+            $('.details-player').css({display: "inherit"});
+            $('.minimized-controls').css({display: "none"});
+
             var player = $('#player');
             player.css({position: 'absolute'});
             player.animate({width: '100%',
