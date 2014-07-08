@@ -45,3 +45,4 @@
 	<source src="<%= src %>" type="<%= type %>" />
 	<%=subtracks%>
 </video>
+<canvas id="eop" style="display : none;"/>

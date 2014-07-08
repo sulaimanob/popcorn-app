@@ -72,6 +72,7 @@
             App.vent.on('stream:ready', _.bind(this.showPlayer, this));
             App.vent.on('player:close', _.bind(this.showViews, this));
             App.vent.on('player:close', _.bind(this.Player.close, this.Player));
+            App.vent.on('player:minimize', _.bind(this.showViews, this));
         },
 
         onShow: function() {
