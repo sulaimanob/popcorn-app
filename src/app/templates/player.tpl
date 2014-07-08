@@ -12,6 +12,10 @@
 			</div>
 		</div>
 	</div>
+        <div class="minimized-controls">
+             <span class="player-maximize">
+             <span class="close-info-player">
+        </div>
 </div>
 <%
 	var subArray = [];

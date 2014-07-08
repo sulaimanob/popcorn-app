@@ -15,7 +15,9 @@
         events: {
             'click .close-info-player': 'closePlayer',
             'click .vjs-fullscreen-control': 'toggleFullscreen',
-            'click .vjs-subtitles-button': 'toggleSubtitles'
+            'click .vjs-subtitles-button': 'toggleSubtitles',
+            'click .player-minimize': 'minimize',
+            'click .player-maximize': 'maximize'
         },
 
         isMovie: function() {
