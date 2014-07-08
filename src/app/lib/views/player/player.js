@@ -78,6 +78,9 @@
             }
 
             this.video.dispose();
+            var player = $('#player');
+            player.removeAttr('style');
+
             App.vent.trigger('player:close');
         },
 
