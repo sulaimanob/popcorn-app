@@ -42,6 +42,8 @@ if(typeof runtime === "undefined"){ runtime = "N/A"; };
 
         <div class="overview"><%= synopsis %></div>
 
+        <div id="player"></div>
+
         <div class="bottom-container">
             <div class="favourites-toggle"><%=i18n.__("Add to bookmarks") %></div>
             <div id="watch-now" class="button"><%=i18n.__("Watch Now") %></div>

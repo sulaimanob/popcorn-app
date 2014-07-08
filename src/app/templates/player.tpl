@@ -3,6 +3,7 @@
 	<div class="details-player">
 		<span class="close-info-player"></span>
 		<div class="download-info-player">
+                        <div class="player-minimize"></div>
 			<div class="eye-info-player"></div>
 			<div class="details-info-player">
 				<div class="arrow-up"></div>

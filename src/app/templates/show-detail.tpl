@@ -37,6 +37,7 @@
 		<div class="episode-info-number"></div>
 		<div class="episode-info-date"></div>
 		<div class="episode-info-description"></div>
+                <div id="player"></div>
 		<div class="show-quality-container">
 			<div class="quality-selector">
 				<div class="q480">480p</div>
