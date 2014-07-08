@@ -214,8 +214,9 @@
 					sendToTrakt();
 					_this.wasSeek = false;
 				}
-
-				_this._ColorTimer = setInterval(checkColor, 1000); // 1 second
+                                if (! _this.model.get('type') === 'video/youtube') {
+				        _this._ColorTimer = setInterval(checkColor, 1000); // 1 second
+                                }
 			});
 
 			player.on('pause', function() {
