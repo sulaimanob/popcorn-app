@@ -48,7 +48,7 @@
                         self.hasMore = false;
                     }
 
-                    self.add(movies);
+                    self.add(movies.results);
                     self.trigger('sync', self);
                     self.state = 'loaded';
                     self.trigger('loaded', self, self.state);
