@@ -244,20 +244,11 @@
             this.Player.show(new App.View.Player({
                 model: streamModel
             }));
-            /*            this.Content.$el.hide();
-            if (this.MovieDetail.$el !== undefined) {
-                this.MovieDetail.$el.hide();
-            }*/
         },
 
-        showViews: function(streamModel) {
-
-            this.Content.$el.show();
-            if (this.MovieDetail.$el !== undefined) {
-                this.MovieDetail.$el.show();
-            }
-            $(window).trigger('resize');
-
+            showViews: function(streamModel) {
+                $(window).trigger('resize');
+                this.Player.reset();
         }
     });
 
