@@ -244,10 +244,10 @@
             this.Player.show(new App.View.Player({
                 model: streamModel
             }));
-            this.Content.$el.hide();
+            /*            this.Content.$el.hide();
             if (this.MovieDetail.$el !== undefined) {
                 this.MovieDetail.$el.hide();
-            }
+            }*/
         },
 
         showViews: function(streamModel) {
