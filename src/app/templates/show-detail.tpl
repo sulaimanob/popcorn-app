@@ -1,4 +1,3 @@
-<div class="tv-container-close"></div>
 <div class="tv-poster">
 	<div data-bgr="<%= images.fanart %>" class="tv-poster-background"><div class="tv-poster-overlay"></div></div>
 	<div data-bgr="<%= images.poster %>" class="tv-cover"></div>
@@ -26,6 +25,7 @@
 			<div class="fa fa-star star-empty"></div>
 		<% }; %>
 		</div>
+                <div class="tv-container-close"></div>
 		<% if (synopsis.length > 776) { var synopsis = synopsis.substring(0, 776) + "..."; } %>
 		<div class="tv-overview"><%= synopsis %></div>
 	</div>
