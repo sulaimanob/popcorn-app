@@ -47,6 +47,9 @@
 	}
 %>
 <video id="video_player" width="100%" height="100%" class="video-js vjs-popcorn-skin" controls preload autoplay >
+	<div class="smallsize-control">
+		<i class="fa fa-eye actions-watched"></i>
+	</div>
 	<source src="<%= src %>" type="<%= type %>" />
 	<%=subtracks%>
 </video>
