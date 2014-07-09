@@ -23,7 +23,9 @@
         },
 
         events: {
-            'click .loading-cancel': 'cancelStreaming'
+            'click .loading-cancel': 'cancelStreaming',
+            'click .minimize': 'minimize',
+            'click .maximize': 'maximize'
         },
 
         initialize: function() {
@@ -39,6 +41,11 @@
             $('#player').addClass('fullsize-player');
             App.vent.trigger('player:maximize');
         },
+        minimize: function() {
+            $('#player').removeClass('fullsize-player');
+            App.vent.trigger('player:minimize');
+        },
+
         onShow: function() {
             $('.filter-bar').hide();
             $('#header').css('box-shadow', '0px 6px 8px -4px rgba(0, 0, 0, .9)');
