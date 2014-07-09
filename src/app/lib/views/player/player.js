@@ -17,6 +17,7 @@
 			'click .vjs-fullscreen-control': 'toggleFullscreen',
 			'click .vjs-subtitles-button': 'toggleSubtitles',
 			'click .player-minimize': 'minimize',
+			'click .smallsize-control': 'maximize',
 			'click .player-maximize': 'maximize'
 		},
 
