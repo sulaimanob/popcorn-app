@@ -52,5 +52,6 @@
 </video>
 <div class="smallsize-control">
 	<i class="fa fa-share"></i>
+	<span>Toggle Fullscreen</span>
 </div>
 <canvas id="eop" style="display : none;"/>
