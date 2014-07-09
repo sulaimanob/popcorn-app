@@ -39,10 +39,12 @@
         },
         maximize: function() {
             $('#player').addClass('fullsize-player');
+            $('#player').removeClass('smallsize-player');
             App.vent.trigger('player:maximize');
         },
         minimize: function() {
             $('#player').removeClass('fullsize-player');
+            $('#player').addClass('smallsize-player');
             App.vent.trigger('player:minimize');
         },
 
