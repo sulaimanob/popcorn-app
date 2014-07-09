@@ -216,7 +216,7 @@
 					sendToTrakt();
 					_this.wasSeek = false;
 				}
-                                if (! _this.model.get('type') === 'video/youtube') {
+                                if (_this.model.get('type') !== 'video/youtube') {
 				        _this._ColorTimer = setInterval(checkColor, 1000); // 1 second
                                 }
 			});
