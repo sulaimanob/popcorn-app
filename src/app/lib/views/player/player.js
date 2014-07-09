@@ -81,7 +81,7 @@
 
 			this.video.dispose();
 			var player = $('#player');
-			player.removeAttr('style');
+                        player.removeClass('fullsize-player');
 
 			App.vent.trigger('player:close');
 		},
@@ -352,12 +352,16 @@
 		},
 
 		minimize: function() {
-			$('#player').removeClass('fullsize-player');
+			var player = $('#player');
+                        player.removeClass('fullsize-player');
+                        player.addClass('smallsize-player');
 			App.vent.trigger('player:minimize');
 		},
 
 		maximize: function() {
-			$('#player').addClass('fullsize-player');
+                        var player = $('#player');
+                        player.removeClass('smallsize-player');
+			player.addClass('fullsize-player');
 			App.vent.trigger('player:maximize');
 		},
 		toggleMouseDebug: function() {
