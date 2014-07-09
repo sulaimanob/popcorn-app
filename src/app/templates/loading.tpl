@@ -21,5 +21,7 @@
 			<div class="download_percent"></div>
 		</div>
 		<div class="loading-cancel"><div class="loading-cancel-text"><%= i18n.__("Cancel") %></div></div>
+		<div class="minimize btn-accept"><div class="loading-cancel-text"><%= i18n.__("Minimize") %></div></div>
+		<div class="maximize btn-accept"><div class="loading-cancel-text"><%= i18n.__("Maximize") %></div></div>
 	</div>
 </div>
