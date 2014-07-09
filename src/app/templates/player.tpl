@@ -51,6 +51,6 @@
 	<%=subtracks%>
 </video>
 <div class="smallsize-control">
-	<i class="fa fa-eye actions-watched"></i>
+	<i class="fa fa-share"></i>
 </div>
 <canvas id="eop" style="display : none;"/>
